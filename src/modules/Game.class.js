@@ -57,10 +57,12 @@ class Game {
       }
     }
 
-    const { row: r, col: c } =
-      emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    if (emptyCells.length > 0) {
+      const { row: r, col: c } =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-    this.board[r][c] = Math.random() < 0.9 ? 2 : 4;
+      this.board[r][c] = Math.random() < 0.9 ? 2 : 4;
+    }
   }
 
   gameLost() {
@@ -111,6 +113,11 @@ class Game {
     });
 
     if (JSON.stringify(this.board) !== prevBoard || this.boardIsEmpty()) {
+      return true;
+    } else if (
+      JSON.stringify(this.board) !== prevBoard ||
+      !this.boardIsEmpty()
+    ) {
       this.addRandomNumber();
 
       return true;
@@ -149,6 +156,11 @@ class Game {
     });
 
     if (JSON.stringify(this.board) !== prevBoard || this.boardIsEmpty()) {
+      return true;
+    } else if (
+      JSON.stringify(this.board) !== prevBoard ||
+      !this.boardIsEmpty()
+    ) {
       this.addRandomNumber();
 
       return true;
